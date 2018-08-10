@@ -28,7 +28,7 @@ public class MockGpsChecker extends CordovaPlugin{
     private com.sandata.MockGpsChecker mContext;
 
     @Override
-    public String execute(String action, JSONArray data, final CallbackContext callbackContext) throws JSONException {
+    public boolean execute(String action, JSONArray data, final CallbackContext callbackContext) throws JSONException {
         mContext = this;
         if (action.equals("check")) {
             objGPS = new JSONObject();
