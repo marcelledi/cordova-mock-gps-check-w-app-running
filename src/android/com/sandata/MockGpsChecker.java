@@ -79,8 +79,12 @@ public class MockGpsChecker extends CordovaPlugin{
                 Log.e("Got exception " , e.getMessage());
             }
         }
-        
-        public static boolean isAppRunning(final Context context, final String packageName) {
+        if (count > 0)
+            return true;
+        return false;
+    }
+	
+	public static boolean isAppRunning(final Context context, final String packageName) {
             final ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
             final List<ActivityManager.RunningAppProcessInfo> procInfos = activityManager.getRunningAppProcesses();
             if (procInfos != null)
@@ -93,11 +97,5 @@ public class MockGpsChecker extends CordovaPlugin{
             }
             return false;
         }
-        
-        
-        if (count > 0)
-            return true;
-        return false;
-    }
 
 }
