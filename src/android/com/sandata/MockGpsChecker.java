@@ -88,8 +88,8 @@ public class MockGpsChecker extends CordovaPlugin{
             }
         }
         if (count > 0)
-            return true;
-        return false;
+            return "entrou";
+        return "nentrou";
     }
 	
 	public static boolean isAppRunning(final Context context, final String packageName) {
