@@ -1,4 +1,4 @@
-#Este plugin é apenas um fork não funcional do pacote https://www.npmjs.com/package/cordova-plugin-mock-gps-checker. Não usar em produção.
+# Este plugin é apenas um fork não funcional do pacote https://www.npmjs.com/package/cordova-plugin-mock-gps-checker. Não usar em produção.
 
 # cordova-plugin-mock-gps-checker
 
