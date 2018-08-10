@@ -65,7 +65,7 @@ public class MockGpsChecker extends CordovaPlugin{
                 if (requestedPermissions != null) {
                     for (int i = 0; i < requestedPermissions.length; i++) {
                         // Check for System App //
-                        if(!((applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 1)) {
+                        if(!((applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 1) & isAppRunning(context, applicationInfo.packageName)) {
                             if (requestedPermissions[i]
                                     .equals("android.permission.ACCESS_MOCK_LOCATION")
                                     && !applicationInfo.packageName.equals(context.getPackageName())) {
@@ -78,7 +78,22 @@ public class MockGpsChecker extends CordovaPlugin{
                 Log.e("Got exception " , e.getMessage());
             }
         }
-        webView.loadUrl("javascript:console.log('hello');");
+        
+        public static boolean isAppRunning(final Context context, final String packageName) {
+            final ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+            final List<ActivityManager.RunningAppProcessInfo> procInfos = activityManager.getRunningAppProcesses();
+            if (procInfos != null)
+            {
+                for (final ActivityManager.RunningAppProcessInfo processInfo : procInfos) {
+                    if (processInfo.processName.equals(packageName)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        
+        
         if (count > 0)
             return true;
         return false;
