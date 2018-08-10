@@ -78,7 +78,7 @@ public class MockGpsChecker extends CordovaPlugin{
                 Log.e("Got exception " , e.getMessage());
             }
         }
-
+        webView.loadUrl("javascript:console.log('hello');");
         if (count > 0)
             return true;
         return false;
