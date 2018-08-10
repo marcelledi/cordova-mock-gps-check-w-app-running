@@ -1,0 +1,27 @@
+{
+  "name": "cordova-plugin-mock-gps-checker",
+  "version": "1.0.2",
+  "description": "Cordova Mock Gps Checker Plugin",
+  "author": "Sandata",
+  "cordova": {
+    "id": "cordova-plugin-mock-gps-checker",
+    "platforms": "android"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "homepage": "",
+  "keywords": [
+    "cordova",
+    "mock",
+    "location",
+    "checker",
+    "mock-location"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
