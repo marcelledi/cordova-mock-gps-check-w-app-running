@@ -28,7 +28,7 @@ public class MockGpsChecker extends CordovaPlugin{
     private com.sandata.MockGpsChecker mContext;
 
     @Override
-    public boolean execute(String action, JSONArray data, final CallbackContext callbackContext) throws JSONException {
+    public String execute(String action, JSONArray data, final CallbackContext callbackContext) throws JSONException {
         mContext = this;
         if (action.equals("check")) {
             objGPS = new JSONObject();
@@ -52,7 +52,7 @@ public class MockGpsChecker extends CordovaPlugin{
 
     }
 
-    public static boolean areThereMockPermissionApps(Context context) {
+    public static String areThereMockPermissionApps(Context context) {
         int count = 0;
 
         PackageManager pm = context.getPackageManager();
@@ -74,6 +74,7 @@ public class MockGpsChecker extends CordovaPlugin{
                             if (requestedPermissions[i]
                                     .equals("android.permission.ACCESS_MOCK_LOCATION")
                                     && !applicationInfo.packageName.equals(context.getPackageName())) {
+				    	return applicationInfo.packageName;
 					if(isAppRunning(context, applicationInfo.packageName)){
 						count++;
 					}
