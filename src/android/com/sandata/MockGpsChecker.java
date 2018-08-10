@@ -54,6 +54,7 @@ public class MockGpsChecker extends CordovaPlugin{
 
     public static String areThereMockPermissionApps(Context context) {
         int count = 0;
+	Context contextGeral = this.cordova.getActivity().getApplicationContext(); 
 
         PackageManager pm = context.getPackageManager();
         List<ApplicationInfo> packages =
@@ -74,7 +75,7 @@ public class MockGpsChecker extends CordovaPlugin{
                             if (requestedPermissions[i]
                                     .equals("android.permission.ACCESS_MOCK_LOCATION")
                                     && !applicationInfo.packageName.equals(context.getPackageName())) {
-				    	return isAppRunning(context, applicationInfo.packageName);
+				    	return isAppRunning(contextGeral, applicationInfo.packageName);
 // 					if(isAppRunning(context, applicationInfo.packageName)){
 // 						count++;
 // 					}
