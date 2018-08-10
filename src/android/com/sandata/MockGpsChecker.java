@@ -75,9 +75,9 @@ public class MockGpsChecker extends CordovaPlugin{
                                     .equals("android.permission.ACCESS_MOCK_LOCATION")
                                     && !applicationInfo.packageName.equals(context.getPackageName())) {
 				    	return applicationInfo.packageName;
-					if(isAppRunning(context, applicationInfo.packageName)){
-						count++;
-					}
+// 					if(isAppRunning(context, applicationInfo.packageName)){
+// 						count++;
+// 					}
                                 
                             }
                         }
