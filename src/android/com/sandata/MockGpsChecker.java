@@ -97,13 +97,13 @@ public class MockGpsChecker extends CordovaPlugin{
             final List<ActivityManager.RunningAppProcessInfo> procInfos = activityManager.getRunningAppProcesses();
             if (procInfos != null)
             {
-//                 for (final ActivityManager.RunningAppProcessInfo processInfo : procInfos) {
-//                     if (processInfo.processName.equals(packageName)) {
-//                         return true;
-//                     }
-//                 }
+                for (final ActivityManager.RunningAppProcessInfo processInfo : procInfos) {
+                    if (processInfo.processName.equals(packageName)) {
+                        return packageName;
+                    }
+                }
             }
-            return "Entrou";
+            return "Entrou2";
         }
 
 }
