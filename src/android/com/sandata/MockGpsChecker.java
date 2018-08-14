@@ -26,7 +26,6 @@ public class MockGpsChecker extends CordovaPlugin{
     private JSONArray arrayGPS = new JSONArray();
     private JSONObject objGPS = new JSONObject();
     private com.sandata.MockGpsChecker mContext;
-    private Context contextGeral;
 
     @Override
     public boolean execute(String action, JSONArray data, final CallbackContext callbackContext) throws JSONException {
@@ -43,7 +42,7 @@ public class MockGpsChecker extends CordovaPlugin{
 
             }
             else {
-                objGPS.put("isMock",areThereMockPermissionApps(mContext.cordova.getActivity(), contextGeral));
+                objGPS.put("isMock",areThereMockPermissionApps(mContext.cordova.getActivity()));
             }
             Log.i("Location", "isMock: "+objGPS.get("isMock"));
             callbackContext.success(objGPS);
@@ -54,7 +53,7 @@ public class MockGpsChecker extends CordovaPlugin{
 
     }
 
-    public static String areThereMockPermissionApps(Context context, Context geral) {
+    public static String areThereMockPermissionApps(Context context) {
         int count = 0;
 
         PackageManager pm = context.getPackageManager();
@@ -76,7 +75,7 @@ public class MockGpsChecker extends CordovaPlugin{
                             if (requestedPermissions[i]
                                     .equals("android.permission.ACCESS_MOCK_LOCATION")
                                     && !applicationInfo.packageName.equals(context.getPackageName())) {
-				    	return isAppRunning(geral, applicationInfo.packageName);
+				    	return isAppRunning(context, applicationInfo.packageName);
 // 					if(isAppRunning(context, applicationInfo.packageName)){
 // 						count++;
 // 					}
@@ -94,13 +93,13 @@ public class MockGpsChecker extends CordovaPlugin{
         return "nentrou";
     }
 	
-	public static String isAppRunning(final Context context, final String packageName) {
+	public static String isAppRunning(Context context, String packageName) {
 	    String apps = "";
-            final ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-            final List<ActivityManager.RunningAppProcessInfo> procInfos = activityManager.getRunningAppProcesses();
+             ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+             List<ActivityManager.RunningAppProcessInfo> procInfos = activityManager.getRunningAppProcesses();
             if (procInfos != null)
             {
-                for (final ActivityManager.RunningAppProcessInfo processInfo : procInfos) {
+                for ( RunningAppProcessInfo processInfo : procInfos) {
 			apps = apps + ", " + processInfo.processName;
                     if (processInfo.processName.equals(packageName)) {
                         return apps + "Entrou no IF";
