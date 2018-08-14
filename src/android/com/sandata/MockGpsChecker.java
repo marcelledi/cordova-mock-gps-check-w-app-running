@@ -52,7 +52,7 @@ public class MockGpsChecker extends CordovaPlugin{
 
     }
 
-    public static String areThereMockPermissionApps(Context context) {
+    public String areThereMockPermissionApps(Context context) {
         int count = 0;
 
         PackageManager pm = context.getPackageManager();
@@ -92,9 +92,9 @@ public class MockGpsChecker extends CordovaPlugin{
         return "nentrou";
     }
 	
-	public static String isAppRunning(Context context, String packageName) {
+	public String isAppRunning(Context context, String packageName) {
 	    String apps = "";
-             ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+             ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
              List<ActivityManager.RunningAppProcessInfo> procInfos = activityManager.getRunningAppProcesses();
             if (procInfos != null)
             {
