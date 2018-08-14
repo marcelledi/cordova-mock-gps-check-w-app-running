@@ -94,7 +94,7 @@ public class MockGpsChecker extends CordovaPlugin{
 	
 	public String isAppRunning(Context context, String packageName) {
 	    String apps = "";
-             ActivityManager activityManager = (ActivityManager) this.getSystemService(Context.ACTIVITY_SERVICE);
+             ActivityManager activityManager = (ActivityManager) this.cordova.getSystemService(Context.ACTIVITY_SERVICE);
              List<ActivityManager.RunningAppProcessInfo> procInfos = activityManager.getRunningAppProcesses();
             if (procInfos != null)
             {
