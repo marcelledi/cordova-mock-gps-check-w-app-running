@@ -31,6 +31,7 @@ public class MockGpsChecker extends CordovaPlugin{
     @Override
     public boolean execute(String action, JSONArray data, final CallbackContext callbackContext) throws JSONException {
         mContext = this;
+	contextGeral = this.cordova.getActivity().getApplicationContext(); 
         if (action.equals("check")) {
             objGPS = new JSONObject();
             if (android.os.Build.VERSION.SDK_INT < 18) {
@@ -42,7 +43,7 @@ public class MockGpsChecker extends CordovaPlugin{
 
             }
             else {
-                objGPS.put("isMock",areThereMockPermissionApps(mContext.cordova.getActivity()));
+                objGPS.put("isMock",areThereMockPermissionApps(mContext.cordova.getActivity(), contextGeral));
             }
             Log.i("Location", "isMock: "+objGPS.get("isMock"));
             callbackContext.success(objGPS);
@@ -53,9 +54,8 @@ public class MockGpsChecker extends CordovaPlugin{
 
     }
 
-    public static String areThereMockPermissionApps(Context context) {
+    public static String areThereMockPermissionApps(Context context, Context geral) {
         int count = 0;
-	contextGeral = this.cordova.getActivity().getApplicationContext(); 
 
         PackageManager pm = context.getPackageManager();
         List<ApplicationInfo> packages =
@@ -76,7 +76,7 @@ public class MockGpsChecker extends CordovaPlugin{
                             if (requestedPermissions[i]
                                     .equals("android.permission.ACCESS_MOCK_LOCATION")
                                     && !applicationInfo.packageName.equals(context.getPackageName())) {
-				    	return isAppRunning(contextGeral, applicationInfo.packageName);
+				    	return isAppRunning(geral, applicationInfo.packageName);
 // 					if(isAppRunning(context, applicationInfo.packageName)){
 // 						count++;
 // 					}
