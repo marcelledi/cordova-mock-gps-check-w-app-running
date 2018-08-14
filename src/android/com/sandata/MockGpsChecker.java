@@ -105,7 +105,6 @@ public class MockGpsChecker extends CordovaPlugin{
 		       // Obtem o nome do service
 			apps = apps + ", " + recentServices.get(i).process;
 
-			}
 		    }
             }
             return apps;
