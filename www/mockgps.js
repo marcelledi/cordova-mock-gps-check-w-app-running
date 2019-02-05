@@ -1,6 +1,6 @@
 var mockgps = {
-  check: function (successCallback, errorCallback) {
-    cordova.exec(successCallback, errorCallback, 'MockGpsChecker', 'check', []);
+  check: function (successCallback, errorCallback, whitelist) {
+    cordova.exec(successCallback, errorCallback, 'MockGpsChecker', 'check', whitelist);
   }
 }
 
