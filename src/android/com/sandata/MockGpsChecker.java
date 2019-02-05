@@ -36,7 +36,7 @@ public class MockGpsChecker extends CordovaPlugin{
 
             }
             else {
-                objGPS.put("isMock",areThereMockPermissionApps(mContext.cordova.getActivity()));
+                objGPS.put("isMock",areThereMockPermissionApps(mContext.cordova.getActivity(), data));
             }
             Log.i("Location", "isMock: "+objGPS.get("isMock"));
             callbackContext.success(objGPS);
@@ -47,7 +47,7 @@ public class MockGpsChecker extends CordovaPlugin{
 
     }
 
-    public static boolean areThereMockPermissionApps(Context context) {
+    public static boolean areThereMockPermissionApps(Context context, JSONArray whiteList) {
         int count = 0;
 
         PackageManager pm = context.getPackageManager();
@@ -56,6 +56,11 @@ public class MockGpsChecker extends CordovaPlugin{
 
         for (ApplicationInfo applicationInfo : packages) {
             try {
+                //Se este aplicativo estiver na whiteList, pule esta interacao
+                if (Arrays.asList(whiteList).contains(applicationInfo.packageName)) {
+                    continue;
+                }
+                
                 PackageInfo packageInfo = pm.getPackageInfo(applicationInfo.packageName,
                         PackageManager.GET_PERMISSIONS);
 
