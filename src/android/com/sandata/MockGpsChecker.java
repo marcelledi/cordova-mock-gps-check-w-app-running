@@ -6,11 +6,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.provider.Settings.Secure;
 import android.util.Log;
-import android.app.ActivityManager;
-import android.app.ActivityManager.RecentTaskInfo;
-import android.app.ActivityManager.RunningAppProcessInfo;
-import android.app.ActivityManager.RunningServiceInfo;
-import android.app.ActivityManager.RunningTaskInfo;
 
 import org.apache.cordova.*;
 import org.json.JSONArray;
@@ -52,7 +47,7 @@ public class MockGpsChecker extends CordovaPlugin{
 
     }
 
-    public String areThereMockPermissionApps(Context context) {
+    public static boolean areThereMockPermissionApps(Context context) {
         int count = 0;
 
         PackageManager pm = context.getPackageManager();
@@ -74,11 +69,7 @@ public class MockGpsChecker extends CordovaPlugin{
                             if (requestedPermissions[i]
                                     .equals("android.permission.ACCESS_MOCK_LOCATION")
                                     && !applicationInfo.packageName.equals(context.getPackageName())) {
-				    	return isAppRunning(context, applicationInfo.packageName);
-// 					if(isAppRunning(context, applicationInfo.packageName)){
-// 						count++;
-// 					}
-                                
+                                count++;
                             }
                         }
                     }
@@ -87,27 +78,10 @@ public class MockGpsChecker extends CordovaPlugin{
                 Log.e("Got exception " , e.getMessage());
             }
         }
+
         if (count > 0)
-            return "entrou";
-        return "nentrou";
+            return true;
+        return false;
     }
-	
-	public String isAppRunning(Context context, String packageName) {
-	    String apps = "";
-             ActivityManager activityManager = (ActivityManager) this.cordova.getActivity().getSystemService(Context.ACTIVITY_SERVICE);
-             List<RunningServiceInfo> recentServices  = activityManager.getRunningServices(Integer.MAX_VALUE);
-            if (procInfos != null)
-            {
-		    
-		    for (int i = 0; i < recentServices.size(); i++) 
-		    {
-
-		       // Obtem o nome do service
-			apps = apps + ", " + recentServices.get(i).process;
-
-		    }
-            }
-            return apps;
-        }
 
 }
